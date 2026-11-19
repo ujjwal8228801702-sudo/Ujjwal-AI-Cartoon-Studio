@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101326"><meta name="description" content="Ujjwal AI Cartoon Studio - Hindi 3D cartoon story video creator">
+<title>Ujjwal AI Cartoon Studio</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#141b31;--line:#293451;--muted:#aab5ce;--text:#f6f7fb;--purple:#8b7cff;--cyan:#55d6d0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#25204c 0,transparent 38%),var(--bg);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:22px max(18px,calc((100% - 1050px)/2));border-bottom:1px solid var(--line);display:flex;align-items:center;gap:13px}
+.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--purple),var(--cyan));display:grid;place-items:center;font-size:23px}
+h1{font-size:18px;margin:0}header p{margin:3px 0 0;color:var(--muted);font-size:12px}
+main{max-width:1050px;margin:28px auto;padding:0 18px 60px}.hero{margin:18px 0 25px}.eyebrow{color:var(--cyan);font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+h2{font-size:clamp(26px,5vw,40px);line-height:1.12;margin:9px 0}.hero p{color:var(--muted);max-width:650px;line-height:1.6}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:linear-gradient(160deg,#171f38,#11182b);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 15px 40px #0003}
+.card h3{margin:0 0 17px;font-size:17px}.field{margin:15px 0}.field label{display:block;font-size:13px;color:#d5dbee;margin-bottom:8px}
+input,select,textarea{width:100%;border:1px solid #34415f;background:#0d1427;color:white;padding:13px 14px;border-radius:12px;font:inherit;outline:none}input:focus,select:focus{border-color:var(--purple)}
+.hint{font-size:12px;color:var(--muted);margin-top:7px}.pills{display:flex;gap:9px;flex-wrap:wrap}.pill{border:1px solid #3a4564;border-radius:999px;padding:9px 13px;color:#e4e8f5;font-size:13px}.pill.active{background:#302b60;border-color:var(--purple)}
+button{border:0;border-radius:12px;padding:14px 18px;background:linear-gradient(100deg,#8272ff,#4bcac7);color:#07101d;font-weight:800;font-size:15px;width:100%;cursor:pointer;margin-top:8px}button:disabled{opacity:.45;cursor:not-allowed}
+.preview{min-height:250px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:var(--muted);border:1px dashed #3a4564;border-radius:15px;padding:22px}.preview .emoji{font-size:48px;margin-bottom:12px}.preview strong{color:white}
+.status{margin-top:15px;border-radius:12px;padding:12px;background:#202943;color:#cbd5ec;font-size:13px;line-height:1.5}
+.scenes{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}.scene{background:#0d1427;border:1px solid var(--line);padding:13px;border-radius:12px}.scene b{font-size:13px}.scene p{font-size:12px;line-height:1.5;color:var(--muted);margin:7px 0 0}
+footer{text-align:center;color:#8190ad;font-size:12px;margin-top:28px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.card{padding:18px}.scenes{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header><div class="logo">🎬</div><div><h1>Ujjwal AI Cartoon Studio</h1><p>Title se Hindi 3D cartoon story banane ka studio</p></div></header>
+<main>
+<section class="hero"><div class="eyebrow">Create • Animate • Tell stories</div><h2>आपकी कहानी, आपकी<br>अपनी 3D Cartoon दुनिया।</h2><p>सिर्फ एक टाइटल लिखकर अपनी हिंदी कार्टून कहानी का प्लान और सीन तैयार करें। असली 3D वीडियो रेंडरिंग के लिए सर्वर और AI वीडियो सेवा जोड़नी होगी।</p></section>
+<div class="layout">
+<section class="card"><h3>✨ नई वीडियो बनाइए</h3>
+<div class="field"><label for="title">वीडियो का टाइटल</label><input id="title" maxlength="120" placeholder="जैसे: लालची शेर और चालाक खरगोश"></div>
+<div class="field"><label>कहानी का प्रकार</label><select id="genre"><option value="moral">सीख देने वाली कहानी</option><option value="adventure">रोमांचक कहानी</option><option value="funny">मज़ेदार बच्चों की कहानी</option><option value="fairy">जादुई परियों की कहानी</option></select></div>
+<div class="field"><label>वीडियो अवधि</label><div class="pills"><span class="pill active">3 मिनट</span></div></div>
+<div class="field"><label>आवाज़ और भाषा</label><div class="pills"><span class="pill active">🇮🇳 हिंदी वॉइस</span></div></div>
+<div class="field"><label>वीडियो स्टाइल</label><div class="pills"><span class="pill active">🌟 3D Cartoon</span></div></div>
+<button id="make">कहानी और सीन तैयार करें</button>
+<div class="hint">यह पहला स्टूडियो बिल्ड है: अभी यह स्टोरीबोर्ड बनाता है, MP4 नहीं।</div></section>
+<section class="card"><h3>🎞️ वीडियो प्रीव्यू</h3><div id="preview" class="preview"><div class="emoji">🦁 🐰 🌳</div><strong>आपकी कहानी यहाँ दिखाई देगी</strong><p>टाइटल लिखें और बटन दबाएँ।</p></div><div id="status" class="status">स्थिति: AI वीडियो रेंडरिंग सर्वर अभी कनेक्ट नहीं है।</div><button id="export" disabled>MP4 वीडियो डाउनलोड (सर्वर जोड़ना बाकी)</button></section>
+</div>
+<section id="storySection" class="card" style="margin-top:18px;display:none"><h3>📖 आपकी कहानी का सीन प्लान</h3><p id="storyIntro" style="color:var(--muted);line-height:1.6"></p><div id="scenes" class="scenes"></div></section>
+<footer>Ujjwal AI Cartoon Studio · Mobile-first web app</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+$('make').addEventListener('click',()=>{
+ const title=$('title').value.trim(); if(!title){$('title').focus();$('status').textContent='पहले वीडियो का टाइटल लिखिए।';return;}
+ const genre=$('genre').value;
+ const plans={
+ moral:[['शानदार शुरुआत','कहानी की दुनिया और मुख्य किरदारों का परिचय।'],['समस्या आती है','मुख्य किरदार के सामने एक मुश्किल खड़ी होती है।'],['नई योजना','किरदार समझदारी से हल खोजने निकलता है।'],['बड़ा मोड़','एक अप्रत्याशित घटना कहानी बदल देती है।'],['समाधान','दोस्ती और समझदारी से समस्या हल होती है।'],['सीख','कहानी का प्यारा संदेश और खुशहाल अंत।']],
+ adventure:[['रहस्यमयी शुरुआत','एक अनोखी जगह पर रोमांचक सफर शुरू होता है।'],['पहली चुनौती','रास्ते में एक कठिन परीक्षा मिलती है।'],['नया साथी','एक मददगार दोस्त सफर में शामिल होता है।'],['खतरे का सामना','टीम हिम्मत से मुश्किल पार करती है।'],['खजाने का राज','सफर का बड़ा रहस्य सामने आता है।'],['यादगार अंत','सभी खुशी से घर लौटते हैं।']],
+ funny:[['मज़ेदार परिचय','मस्तीभरे किरदारों की शरारत शुरू होती है।'],['गड़बड़','एक छोटी गलती से बड़ी कॉमेडी हो जाती है।'],['उलझन','सब मिलकर गड़बड़ ठीक करने की कोशिश करते हैं।'],['हँसी का धमाका','एक मज़ेदार ट्विस्ट आता है।'],['समाधान','दोस्त मिलकर समस्या सुलझाते हैं।'],['खुशी का अंत','सब हँसते-हँसते कहानी खत्म करते हैं।']],
+ fairy:[['जादुई दुनिया','एक रंगीन जादुई दुनिया का दरवाज़ा खुलता है।'],['जादुई संदेश','मुख्य किरदार को एक खास मिशन मिलता है।'],['जादुई दोस्त','एक अनोखा साथी मदद के लिए आता है।'],['कठिन परीक्षा','जादू और हिम्मत की परीक्षा होती है।'],['चमत्कार','सच्चाई और अच्छाई से जादू सफल होता है।'],['सुनहरा अंत','पूरी दुनिया में खुशियाँ लौट आती हैं।']]
+ };
+ const names={moral:'सीख देने वाली',adventure:'रोमांचक',funny:'मज़ेदार',fairy:'जादुई'};
+ $('preview').innerHTML='<div class="emoji">🎬 ✨</div><strong>'+escapeHtml(title)+'</strong><p>3 मिनट · 3D Cartoon · हिंदी</p>';
+ $('storyIntro').textContent='“'+title+'” — '+names[genre]+' कहानी। यह 6 सीन का शुरुआती स्टोरीबोर्ड है; हर सीन लगभग 30 सेकंड का होगा।';
+ $('scenes').innerHTML=plans[genre].map((s,i)=>'<article class="scene"><b>सीन '+(i+1)+' · '+s[0]+'</b><p>'+s[1]+'</p></article>').join('');
+ $('storySection').style.display='block';
+ $('status').textContent='स्टोरीबोर्ड तैयार है। असली AI चित्र, 3D मोशन, हिंदी ऑडियो और MP4 बनाने के लिए सुरक्षित बैकएंड/API कनेक्शन अगला चरण है।';
+ $('storySection').scrollIntoView({behavior:'smooth',block:'start'});
+});
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+</script>
+</body></html>
