@@ -62,5 +62,38 @@ $('make').addEventListener('click',()=>{
  $('storySection').scrollIntoView({behavior:'smooth',block:'start'});
 });
 function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+$('make').addEventListener('click', async () => {
+  const title = $('title').value.trim();
+  if (!title) return;
+  const button = $('make');
+  button.disabled = true;
+  button.textContent = 'AI कहानी लिख रहा है…';
+  $('status').textContent = 'Gemini AI से हिंदी कहानी और 6 सीन बनाने की कोशिश हो रही है…';
+  try {
+    const response = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, genre: $('genre').value })
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'API request failed');
+    $('storyIntro').textContent = data.intro || '';
+    $('scenes').innerHTML = data.scenes.map((s, i) =>
+      '<article class="scene"><b>सीन ' + (i + 1) + ' · ' + escapeHtml(s.name) +
+      '</b><p>' + escapeHtml(s.description) +
+      '</p><p><b>हिंदी वॉइस:</b> ' + escapeHtml(s.narration) +
+      '</p><p><b>3D Visual Prompt:</b> ' + escapeHtml(s.visual_prompt) + '</p></article>'
+    ).join('');
+    $('storySection').style.display = 'block';
+    $('status').textContent = 'AI कहानी तैयार है। 6 सीन, हिंदी narration और 3D visual prompts बन गए हैं। अभी चित्र/वीडियो रेंडर और MP4 export अगला चरण है।';
+  } catch (error) {
+    $('status').textContent = 'लोकल स्टोरीबोर्ड दिख रहा है। AI सर्वर अभी कनेक्ट नहीं है: ' + error.message + ' — Vercel पर deploy करके GEMINI_API_KEY जोड़ें।';
+  } finally {
+    button.disabled = false;
+    button.textContent = 'कहानी और सीन तैयार करें';
+  }
+});
+
 </script>
 </body></html>
