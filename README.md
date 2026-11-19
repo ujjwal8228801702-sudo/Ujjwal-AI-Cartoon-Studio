@@ -1,25 +1,29 @@
 # Ujjwal AI Cartoon Studio
 
-A mobile-first Hindi 3D cartoon video studio starter.
+Mobile-first Hindi 3D cartoon story studio.
 
-## Current build
-- Responsive interface for Android/mobile and desktop.
-- Title input and story genre selection.
-- Creates a six-scene storyboard for a 3-minute Hindi 3D cartoon concept.
-- Clearly indicates that real AI image/video generation and MP4 export are not connected yet.
+## Features in this build
+- Responsive Android/mobile-first interface.
+- Story title and genre input.
+- Local six-scene storyboard fallback.
+- Secure server-side Gemini story generation endpoint at `/api/generate`.
+- AI response includes Hindi narration and consistent-character 3D visual prompts.
+- API keys stay on the server; never add secrets to frontend files.
 
-## Important
-GitHub Pages can host the front-end, but it cannot run a private server or safely store AI API keys. Real generation requires a backend service and configured providers for:
-1. Hindi story/script generation.
-2. Consistent 3D character/image generation.
-3. Image-to-video or 3D animation rendering.
-4. Hindi text-to-speech and audio mixing.
-5. MP4 rendering and secure file delivery.
+## Deploy the app and API (recommended: Vercel)
+GitHub Pages only hosts static files and cannot run the `api/generate.js` serverless function. Deploy this same repository to Vercel to enable AI story generation:
 
-Do not put API keys in `index.html` or any public GitHub file.
+1. Sign in to Vercel and choose **Add New → Project**.
+2. Import `ujjwal8228801702-sudo/Ujjwal-AI-Cartoon-Studio` from GitHub.
+3. Keep the default settings and deploy.
+4. In the Vercel project open **Settings → Environment Variables**.
+5. Add `GEMINI_API_KEY` with your Google AI Studio API key. Do not paste the key into GitHub or this chat.
+6. Redeploy the project after adding the variable.
 
-## Run locally
-Open `index.html` in a browser, or serve this folder with any static web server.
+The AI story endpoint uses Gemini 2.5 Flash. Check current Google AI Studio model availability, usage limits and pricing before production use.
 
-## Deploy
-Enable GitHub Pages for the repository using the `main` branch and `/(root)` folder.
+## Video generation status
+This version generates a story, six scene descriptions, Hindi narration text and 3D visual prompts. It does **not** yet render real animated video or MP4. That next stage needs a video/animation provider, Hindi text-to-speech, audio mixing and an MP4 rendering pipeline. Provider credentials must be stored as server environment variables.
+
+## Local preview
+Open `index.html` in a browser. The local storyboard works without the API; AI generation requires deployment with the environment variable above.
