@@ -44,23 +44,6 @@ footer{text-align:center;color:#8190ad;font-size:12px;margin-top:28px}
 </main>
 <script>
 const $=id=>document.getElementById(id);
-$('make').addEventListener('click',()=>{
- const title=$('title').value.trim(); if(!title){$('title').focus();$('status').textContent='पहले वीडियो का टाइटल लिखिए।';return;}
- const genre=$('genre').value;
- const plans={
- moral:[['शानदार शुरुआत','कहानी की दुनिया और मुख्य किरदारों का परिचय।'],['समस्या आती है','मुख्य किरदार के सामने एक मुश्किल खड़ी होती है।'],['नई योजना','किरदार समझदारी से हल खोजने निकलता है।'],['बड़ा मोड़','एक अप्रत्याशित घटना कहानी बदल देती है।'],['समाधान','दोस्ती और समझदारी से समस्या हल होती है।'],['सीख','कहानी का प्यारा संदेश और खुशहाल अंत।']],
- adventure:[['रहस्यमयी शुरुआत','एक अनोखी जगह पर रोमांचक सफर शुरू होता है।'],['पहली चुनौती','रास्ते में एक कठिन परीक्षा मिलती है।'],['नया साथी','एक मददगार दोस्त सफर में शामिल होता है।'],['खतरे का सामना','टीम हिम्मत से मुश्किल पार करती है।'],['खजाने का राज','सफर का बड़ा रहस्य सामने आता है।'],['यादगार अंत','सभी खुशी से घर लौटते हैं।']],
- funny:[['मज़ेदार परिचय','मस्तीभरे किरदारों की शरारत शुरू होती है।'],['गड़बड़','एक छोटी गलती से बड़ी कॉमेडी हो जाती है।'],['उलझन','सब मिलकर गड़बड़ ठीक करने की कोशिश करते हैं।'],['हँसी का धमाका','एक मज़ेदार ट्विस्ट आता है।'],['समाधान','दोस्त मिलकर समस्या सुलझाते हैं।'],['खुशी का अंत','सब हँसते-हँसते कहानी खत्म करते हैं।']],
- fairy:[['जादुई दुनिया','एक रंगीन जादुई दुनिया का दरवाज़ा खुलता है।'],['जादुई संदेश','मुख्य किरदार को एक खास मिशन मिलता है।'],['जादुई दोस्त','एक अनोखा साथी मदद के लिए आता है।'],['कठिन परीक्षा','जादू और हिम्मत की परीक्षा होती है।'],['चमत्कार','सच्चाई और अच्छाई से जादू सफल होता है।'],['सुनहरा अंत','पूरी दुनिया में खुशियाँ लौट आती हैं।']]
- };
- const names={moral:'सीख देने वाली',adventure:'रोमांचक',funny:'मज़ेदार',fairy:'जादुई'};
- $('preview').innerHTML='<div class="emoji">🎬 ✨</div><strong>'+escapeHtml(title)+'</strong><p>3 मिनट · 3D Cartoon · हिंदी</p>';
- $('storyIntro').textContent='“'+title+'” — '+names[genre]+' कहानी। यह 6 सीन का शुरुआती स्टोरीबोर्ड है; हर सीन लगभग 30 सेकंड का होगा।';
- $('scenes').innerHTML=plans[genre].map((s,i)=>'<article class="scene"><b>सीन '+(i+1)+' · '+s[0]+'</b><p>'+s[1]+'</p></article>').join('');
- $('storySection').style.display='block';
- $('status').textContent='स्टोरीबोर्ड तैयार है। असली AI चित्र, 3D मोशन, हिंदी ऑडियो और MP4 बनाने के लिए सुरक्षित बैकएंड/API कनेक्शन अगला चरण है।';
- $('storySection').scrollIntoView({behavior:'smooth',block:'start'});
-});
 function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
 $('make').addEventListener('click', async () => {
@@ -76,6 +59,11 @@ $('make').addEventListener('click', async () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, genre: $('genre').value })
     });
+    const contentType = response.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) {
+      const raw = await response.text();
+      throw new Error('सर्वर API उपलब्ध नहीं है (HTTP ' + response.status + '). Deployment में /api/generate route जाँचें।');
+    }
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'API request failed');
     $('storyIntro').textContent = data.intro || '';
