@@ -1,29 +1,34 @@
 # Ujjwal AI Cartoon Studio
 
-Mobile-first Hindi 3D cartoon story studio.
+Mobile-first Hindi cartoon story studio.
 
-## Features in this build
+## Current features
 - Responsive Android/mobile-first interface.
 - Story title and genre input.
-- Local six-scene storyboard fallback.
-- Secure server-side Gemini story generation endpoint at `/api/generate`.
-- AI response includes Hindi narration and consistent-character 3D visual prompts.
-- API keys stay on the server; never add secrets to frontend files.
+- Gemini-powered Hindi story plan with six scenes, narration text and consistent-character visual prompts.
+- Server-side API key handling; never place secrets in frontend files or GitHub.
 
-## Deploy the app and API (recommended: Vercel)
-GitHub Pages only hosts static files and cannot run the `api/generate.js` serverless function. Deploy this same repository to Vercel to enable AI story generation:
+## Deploy to Vercel
+1. Import this repository: `ujjwal8228801702-sudo/Ujjwal-AI-Cartoon-Studio`.
+2. Use the repository root as the project root.
+3. In Vercel, open **Settings → Environment Variables**.
+4. Add `GEMINI_API_KEY` for Production (and Preview if needed).
+5. Redeploy after saving the variable.
+6. Test `/api/health`. It should return JSON with `ok: true` and `runtime: "vercel-serverless"`.
 
-1. Sign in to Vercel and choose **Add New → Project**.
-2. Import `ujjwal8228801702-sudo/Ujjwal-AI-Cartoon-Studio` from GitHub.
-3. Keep the default settings and deploy.
-4. In the Vercel project open **Settings → Environment Variables**.
-5. Add `GEMINI_API_KEY` with your Google AI Studio API key. Do not paste the key into GitHub or this chat.
-6. Redeploy the project after adding the variable.
+Vercel uses `api/generate.js` for `POST /api/generate` and `api/health.js` for `GET /api/health`.
 
-The AI story endpoint uses Gemini 2.5 Flash. Check current Google AI Studio model availability, usage limits and pricing before production use.
+## Deploy to Google Cloud Run
+This repository includes `server.js` and `package.json`. Cloud Run must deploy from this GitHub repository as a Node.js source build and start the command `npm start` (or `node server.js`).
+1. Connect the GitHub repository to a Cloud Run source deployment.
+2. Set the runtime environment variable `GEMINI_API_KEY` in the Cloud Run service configuration. Do not commit the key to GitHub.
+3. Deploy a new revision.
+4. Test `/api/health`. It should return JSON with `ok: true` and `runtime: "node-cloud-run"`.
+
+The Node server listens on `0.0.0.0` and the port supplied by Cloud Run. It serves the website and the same `POST /api/generate` endpoint.
 
 ## Video generation status
-This version generates a story, six scene descriptions, Hindi narration text and 3D visual prompts. It does **not** yet render real animated video or MP4. That next stage needs a video/animation provider, Hindi text-to-speech, audio mixing and an MP4 rendering pipeline. Provider credentials must be stored as server environment variables.
+This build generates a Hindi story plan, six scene descriptions, narration text and 3D visual prompts. It does **not** yet render real animated 3D video or MP4. That requires a video/animation provider, Hindi text-to-speech, audio mixing and a rendering pipeline. Check provider pricing and quotas before enabling paid services.
 
-## Local preview
-Open `index.html` in a browser. The local storyboard works without the API; AI generation requires deployment with the environment variable above.
+## Secret safety
+Never paste your Gemini API key into chat, `index.html`, or a GitHub file. Store it only in the deployment platform's environment variables.
